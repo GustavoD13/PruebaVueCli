@@ -1,59 +1,85 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-pwa" target="_blank" rel="noopener">pwa</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+<div>
+  <b-navbar variant="faded" type="light" class="border">
+    <b-navbar-brand href="#">BootstrapVue</b-navbar-brand>
+  </b-navbar>
+  <div class="container">
+
+
+  <div class="d-flex p-2 border mt-3">
+    
+   
+    <b-row>
+    <b-col >
+      <b-button-group size="sm">
+        <b-button v-b-tooltip.hover title="Vista de lista"><font-awesome-icon icon="th" /></b-button>
+        <b-button v-b-tooltip.hover title="Vista de tarjetas"><font-awesome-icon icon="th-list"/></b-button>
+        <b-button v-b-tooltip.hover title="Descargar"><font-awesome-icon icon="file-pdf"/></b-button>
+      </b-button-group>
+    </b-col>
+    <b-col > 
+      <b-input-group size="sm" prepend="$">
+    <b-form-input size="sm" v-b-tooltip.hover title="Ingresar Costo"></b-form-input>
+    <b-input-group-append>
+      <b-button v-b-tooltip.hover title="Editar"><font-awesome-icon icon="edit"/></b-button>
+      <b-button v-b-tooltip.hover title="Guardar"><font-awesome-icon icon="save"/></b-button>
+    </b-input-group-append>
+  </b-input-group></b-col>
+  </b-row>
+
   </div>
+
+ 
+
+  <br>
+
+    <b-table striped hover :items="items"></b-table>
+    </div>
+  </div>
+
 </template>
 
 <script>
 export default {
   name: 'HelloWorld',
-  props: {
-    msg: String
-  }
+       data(){
+    return{
+      items: []
+    }
+  },
+  created:function(){
+     this.fetchItems();
+  },
+  methods:{
+
+    
+   fetchItems()
+    {
+ let uri = 'http://localhost:3000/users';
+      this.axios.get(uri).then((response) => {      
+        this.items = response.data;
+      }).catch(error => {
+    throw new Error(error);
+  })
+    },
 }
+
+
+  }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+.px-2 {
+ width: 75%;
+ align-self: center;
+  margin-left: 20px !important;
+  margin-right: 20px  !important;
+  margin-top: 20px !important;
+  margin-bottom: 20px  !important;
+  
+
+  
 }
 </style>
