@@ -14,9 +14,11 @@ const getUsers = async (req, res) => {
 };
 
 const getUserById = async (req, res) => {
-    const id = parseInt(req.params.id);    
-    const response = await pool.query('SELECT * FROM medidor WHERE medidor = $1', [id]);
+    const anio = req.params.fecha.substring(3);  
+    const mes = req.params.fecha.substring(0,2); 
+    const response = await pool.query('SELECT medidor,anio,mes, consumo, porcentaje, costo FROM medidor, medicion  where medidor.idedificio =1  and medidor.nromedidor = medicion.medidor and anio =$1 and mes = $2', [anio, mes]);
     res.json(response.rows);
+    
 };
 /*
 const createUser = async (req, res) => {

@@ -4,11 +4,7 @@
     <b-navbar-brand href="#">BootstrapVue</b-navbar-brand>
   </b-navbar>
   <div class="container">
-
-
-  <div class="d-flex p-2 border mt-3">
-    
-   
+  <div class="d-flex p-2 border mt-3">   
     <b-row>
     <b-col >
       <b-button-group size="sm">
@@ -22,37 +18,57 @@
     <b-form-input size="sm" v-b-tooltip.hover title="Ingresar Costo"></b-form-input>
     <b-input-group-append>
       <b-button v-b-tooltip.hover title="Editar"><font-awesome-icon icon="edit"/></b-button>
-      <b-button v-b-tooltip.hover title="Guardar"><font-awesome-icon icon="save"/></b-button>
+      <b-button v-b-tooltip.hover title="Guardar" v-on:click="obtengofecha()"><font-awesome-icon icon="save"/></b-button>
     </b-input-group-append>
-  </b-input-group></b-col>
+  </b-input-group>
+  </b-col>
+  <b-col > 
+    <b-input-group size="sm">
+    <date-picker  v-model="fecha" :config="options"></date-picker>
+    <b-input-group-append>
+      <b-button v-b-tooltip.hover title="Buscar" v-on:click="obtengoMesAnio()"><font-awesome-icon icon="search"/></b-button>
+      </b-input-group-append>
+     </b-input-group>
+  </b-col>
   </b-row>
-
   </div>
-
- 
-
   <br>
-
-    <b-table striped hover :items="items"></b-table>
+    
+    <!--<b-table striped hover :items="items"></b-table>-->
+    <div class="mt-3">
+    <b-card-group deck>
+     <b-card v-for="item in items" :key="item.id" border-variant="info" header="Info" align="center">
+        <b-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</b-card-text>
+     </b-card>
+     </b-card-group>
+     </div>
     </div>
   </div>
 
 </template>
 
 <script>
+import datePicker from 'vue-bootstrap-datetimepicker';
 export default {
   name: 'HelloWorld',
        data(){
     return{
-      items: []
+      items: [],
+      fecha:  new Date().getMonth()+1 +'-'+new Date().getFullYear(),
+        options: {
+          format: 'MM-YYYY',
+          useCurrent: false,
+        }       
     }
-  },
+   },
+      components: {
+      datePicker
+    },
   created:function(){
-     this.fetchItems();
+     this.obtengoMesAnio()//this.fetchItems();
   },
   methods:{
-
-    
+    /*
    fetchItems()
     {
  let uri = 'http://localhost:3000/users';
@@ -62,6 +78,17 @@ export default {
     throw new Error(error);
   })
     },
+*/
+    obtengoMesAnio: function () {
+      const fecha= this.fecha;
+     let uri = 'http://localhost:3000/users/'+fecha;
+      this.axios.get(uri).then((response) => {      
+        this.items = response.data;
+      }).catch(error => {
+    throw new Error(error);
+                         })  
+                              },    
+    
 }
 
 
