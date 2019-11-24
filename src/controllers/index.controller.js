@@ -1,10 +1,10 @@
 const { Pool } = require('pg');
 
 const pool = new Pool({
-    user: 'sqcafpzhwucbjx',//'postgres',
-    host: 'ec2-54-225-205-79.compute-1.amazonaws.com',//'localhost',
-    password: '5e84e05ad902d60b979e98f3645e30906cd060fda1733ad447e969e5b865d9ce//',//'Ada$tra456',
-    database: 'd72nad3ptkep8j',//'medicion',
+    user: 'postgres', //'sqcafpzhwucbjx',//
+    host: 'localhost',//'ec2-54-225-205-79.compute-1.amazonaws.com',//
+    password: 'Ada$tra456',//'5e84e05ad902d60b979e98f3645e30906cd060fda1733ad447e969e5b865d9ce//',//
+    database: 'medicion',//'d72nad3ptkep8j',//
     port: '5432'
 });
 
@@ -16,7 +16,7 @@ const getUsers = async (req, res) => {
 const getUserById = async (req, res) => {
     const anio = req.params.fecha.substring(3);  
     const mes = req.params.fecha.substring(0,2); 
-    const response = await pool.query('SELECT medidor,anio,mes, consumo, porcentaje, costo FROM medidor, medicion  where medidor.idedificio =1  and medidor.nromedidor = medicion.medidor and anio =$1 and mes = $2', [anio, mes]);
+    const response = await pool.query('SELECT unidad,medidor,anio,mes, consumo, porcentaje, costo FROM medidor, medicion  where medidor.idedificio =1  and medidor.nromedidor = medicion.medidor and anio =$1 and mes = $2', [anio, mes]);
     res.json(response.rows);
     
 };

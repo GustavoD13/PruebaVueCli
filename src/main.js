@@ -12,10 +12,10 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCoffee, faThList, faTh, faEdit, faFilePdf, faSave,faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faCoffee, faThList, faTh, faEdit, faFilePdf, faSave,faSearch, faArrowCircleRight } from '@fortawesome/free-solid-svg-icons'
 import  {FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faCoffee, faTh, faThList, faEdit, faFilePdf,faSave,faSearch )
+library.add(faCoffee, faTh, faThList, faEdit, faFilePdf,faSave,faSearch, faArrowCircleRight )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 

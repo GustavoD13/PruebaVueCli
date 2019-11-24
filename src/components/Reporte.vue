@@ -1,10 +1,29 @@
 <template>
-<!--<div class="display: grid border">-->
-  <div class="grid-container ">
- <!-- <div class="container border-secondary">-->
-   <div class="main">
-  <div class="d-flex p-2 border mt-3">   
-    <b-row>
+<div class="container">
+  <header>
+    <!-- Header content -->
+  </header>
+
+  <nav>
+    <!-- Navigation -->
+    <b-card-body class=" mb-5 shadow-lg rounded">
+      <b-card-title>Altea II</b-card-title>
+      <b-card-sub-title class="mb-2">Domicilio: </b-card-sub-title>
+      <b-card-text>
+        Isabel La Catolica 1078
+      </b-card-text>
+    </b-card-body>
+
+    <b-list-group flush class=" mb-5 shadow-lg rounded">
+      <b-list-group-item>Dia Facturacion: 12 </b-list-group-item>
+      <b-list-group-item>Dapibus ac facilisis in</b-list-group-item>
+      <b-list-group-item>Vestibulum at eros</b-list-group-item>
+    </b-list-group>
+  </nav>
+
+  <main>
+    <!-- Main content -->
+        <b-row>
     <b-col > 
       <b-input-group size="sm" prepend="$">
     <b-form-input size="sm" v-model="importe" v-b-tooltip.hover title="Ingresar Costo"></b-form-input>
@@ -23,46 +42,48 @@
     </b-input-group-append>
      </b-input-group>
   </b-col>
-  
-    <b-col > 
-    ConsumoTotal: {{this.consumoTotal}}
-    </b-col>
-     <b-col > 
-    Importe: {{this.importe}}
-    </b-col>
-    <b-col > 
-    Promedio: {{this.promedio}}
-    </b-col>
-  </b-row>
-  </div>
-  <br>
-    <div class="mt-3" v-if ="mostrar">
+    </b-row>
+  <div class="mt-3" v-if ="mostrar">
     <b-table striped hover :items="items" class="border"></b-table>
    </div>
    <div class="mt-3" v-else>
     <b-card-group deck  v-for="row in formattedItems" :key="row.id">
-    <b-card v-for="item in row" :key="item.id" border-variant="info" :header="item.unidad" align="center" class="m-1"> 
+    <b-card v-for="item in row" :key="item.id" border-variant="info" :header="item.unidad" align="center" class="m-1 font-italic"> 
    <!--   <b-card v-for="item in row" :key="item.id" border-variant="info" :header="item.unidad" align="center" class="card">-->
-        <b-card-text>
-
-    <b-list-group >
-      <b-list-group-item>Medidor: {{item.medidor}}</b-list-group-item>
-      <b-list-group-item>Consumo: {{item.consumo}}</b-list-group-item>
-      <b-list-group-item>Porcentaje: {{item.porcentaje}}</b-list-group-item>
-      <b-list-group-item>Costo: {{item.costo}}</b-list-group-item>
-    </b-list-group>
- </b-card-text>
+   <b-card-text class="text-left text-monospace">
+       Consumo: {{item.consumo}} Kw
+       Porcentaje: {{item.porcentaje}}
+       Costo: {{item.costo}}
+  </b-card-text>
      </b-card>
     </b-card-group>
      </div> 
-    </div>
-  
-  <div class="sidenav">
 
-  </div>
+  </main>
 
-  </div>
+  <aside>
+    <!-- Sidebar / Ads -->
+    <b-card header="Consumo Total" bg-variant="secondary" text-variant="white" class=" mb-5 shadow-lg rounded">
+      <blockquote class="card-blockquote">
+        <h4 class="mb-0">{{this.consumoTotal}}</h4>
+      </blockquote>
+    </b-card>
+    <b-card header="Importe" bg-variant="bg-light" text-variant="text-dark" class=" mb-5 shadow-lg rounded border">
+      <blockquote class="card-blockquote">
+        <h4 class="mb-0">{{this.importe}}</h4>
+      </blockquote>
+    </b-card>
+    <b-card header="Consumo Promedio" bg-variant="info" text-variant="white" class=" mb-5 shadow-lg rounded">
+      <blockquote class="card-blockquote">
+        <h4 class="mb-0">{{this.promedio}}</h4>
+      </blockquote>
+    </b-card>
+  </aside>
 
+  <footer>
+    <!-- Footer content -->
+  </footer>
+</div>
 </template>
 
 <script>
@@ -133,7 +154,7 @@ export default {
 computed: {
       formattedItems() {
           return this.items.reduce((c, n, i) => {
-              if (i % 6 === 0) c.push([]);
+              if (i % 4 === 0) c.push([]);
               c[c.length - 1].push(n);
               return c;
           }, []);
@@ -144,70 +165,79 @@ computed: {
 
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-.grid-container {
+
+.container {
   display: grid;
-  grid-template-columns: 240px 1fr;
-  grid-template-rows: 50px 1fr 50px;
+
   grid-template-areas:
-    "sidenav header"
-    "sidenav main"
-    "sidenav footer";
+    "header header header"
+    "nav content side"
+    "footer footer footer";
+
+  grid-template-columns: 200px 1fr 200px;
+  grid-template-rows: auto 1fr auto;
+  grid-gap: 10px;
   height: 100vh;
-  border: 2px solid #201d1d
+  border-color: black;
 }
 
-.header {
+header {
   grid-area: header;
-  background-color: #648ca6;
+  background-color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.sidenav {
-  grid-area: sidenav;
-  background-color: #394263;
+nav {
+  grid-area: nav;
+  margin-left: 0.5rem;
+  margin-right: 1rem;
+  margin-top:5rem;
 }
 
-.main {
-  grid-area: main;
-  margin: 5px;
-  border: 2px solid #bd2121;
-  padding-left: 50px;
-  padding-right: 50px;
-  padding-top: 5px;
+main {
+  grid-area: content;
   
 }
 
-.footer {
-  grid-area: footer;
-  background-color: #648ca6;
+aside {
+  grid-area: side;
+  margin-right: 0.5rem;
+  margin-left: 1rem;
+  margin-top:10rem;
 }
-.px-2 {
- width: 75%;
- align-self: center;
-  margin-left: 20px !important;
-  margin-right: 20px  !important;
-  margin-top: 20px !important;
-  margin-bottom: 20px  !important;
-   
-}
- /*.card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 50%;
-    background-color: #82bef6;
-    margin: 50px;
-    -webkit-column-break-inside: avoid;
-    padding: 24px;
-    box-sizing: border-box;
-    border: 2px solid #e7e7e7;
-    border-radius: 4px;
-    padding: .5rem;
-  }*/
 
- .card {
-    max-width: 250px;
-    max-height: 300px;
+footer {
+  grid-area: footer;
+  background-color: beige;
 }
+
+@media (max-width: 768px) {
+  .container {
+    grid-template-areas:
+      "header"
+      "nav"
+      "content"
+      "side"
+      "footer";
+
+    grid-template-columns: 1fr;
+    grid-template-rows:
+      auto /* Header */
+      minmax(75px, auto) /* Nav */
+      1fr /* Content */
+      minmax(75px, auto) /* Sidebar */
+      auto; /* Footer */
+  }
+
+  nav, aside {
+    margin: 0;
+  }
+}
+ 
+
+
+
 </style>
