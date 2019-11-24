@@ -1,10 +1,10 @@
 const { Pool } = require('pg');
 
 const pool = new Pool({
-    user: 'postgres', //'sqcafpzhwucbjx',//
-    host: 'localhost',//'ec2-54-225-205-79.compute-1.amazonaws.com',//
-    password: 'Ada$tra456',//'5e84e05ad902d60b979e98f3645e30906cd060fda1733ad447e969e5b865d9ce//',//
-    database: 'medicion',//'d72nad3ptkep8j',//
+    user: 'd72nad3ptkep8j',//'postgres', //
+    host: 'ec2-54-225-205-79.compute-1.amazonaws.com',//'localhost',//
+    password: '79e1cf9dbce8df520515846a132ee233f318d517882b32fdc77bbf0c01ecf3ad//',//'Ada$tra456',//
+    database: 'd72nad3ptkep8j',//'medicion',/
     port: '5432'
 });
 
