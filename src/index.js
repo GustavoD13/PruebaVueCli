@@ -10,8 +10,8 @@ app.use(cors());
 // Routes
 app.use(require('./routes/index'));
 
-app.listen(3000);
-
+//app.listen(3000);
+app.listen(process.env.NODE_ENV);
 
   
   process.on('unhandledRejection', error => {
