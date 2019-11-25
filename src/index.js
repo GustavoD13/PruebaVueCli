@@ -11,7 +11,8 @@ app.use(cors());
 app.use(require('./routes/index'));
 
 //app.listen(3000);
-app.listen(process.env.NODE_ENV);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT);
 
   
   process.on('unhandledRejection', error => {
