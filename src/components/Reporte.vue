@@ -116,7 +116,8 @@ export default {
   methods:{
     obtengoMesAnio: function () {
       const fecha= this.fecha;
-     let uri = 'http://localhost:3000/users/'+fecha;
+      const baseUrl = process.env.baseURL || "http://localhost:3000"
+     let uri = baseUrl+'/users/'+fecha;
       this.axios.get(uri).then((response) => {      
         this.items = response.data;
            this.obtenerConsumoTotal();
