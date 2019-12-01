@@ -48,7 +48,7 @@
    </div>
    <div class="mt-3" v-else>
     <b-card-group deck  v-for="row in formattedItems" :key="row.id">
-    <b-card v-for="item in row" :key="item.id" border-variant="info" :header="item.unidad" align="center" class="m-1 font-italic"> 
+    <b-card v-for="item in row" :key="item.id"  :header="item.unidad" align="center" class="m-1 font-italic border-left"> 
    <!--   <b-card v-for="item in row" :key="item.id" border-variant="info" :header="item.unidad" align="center" class="card">-->
    <b-card-text class="text-left text-monospace">
        Consumo: {{item.consumo}} Kw
