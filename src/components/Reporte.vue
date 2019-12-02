@@ -116,7 +116,7 @@ export default {
   methods:{
     obtengoMesAnio: function () {
       const fecha= this.fecha;
-      const baseUrl = process.env.baseURL || "http://localhost:3000";
+      const baseUrl = "https://vuecliprueb.herokuapp.com";//process.env.baseURL || "http://localhost:3000";
      let uri = baseUrl+'/users/'+fecha;
       this.axios.get(uri).then((response) => {      
         this.items = response.data;
