@@ -116,13 +116,14 @@ export default {
   methods:{
     obtengoMesAnio: function () {
       const fecha= this.fecha;
-      const baseUrl = process.env.baseURL || "http://localhost:3000";
-     let uri = baseUrl+'/users/'+fecha;
+      //const baseUrl = process.env.baseURL || "http://localhost:3000";
+      const PORT = process.env.PORT;
+     let uri = 'http://localhost:'+PORT+'/users/'+fecha;
       this.axios.get(uri).then((response) => {      
         this.items = response.data;
            this.obtenerConsumoTotal();
            this.obtenerConsumoPromedio();
-           
+
       }).catch(error => {
     throw new Error(error);
     })  
