@@ -78,7 +78,7 @@
         <h4 class="mb-0">{{this.promedio}}</h4>
       </blockquote>
     </b-card>
-  </aside>
+    </aside>
 
   <footer>
     <!-- Footer content -->
