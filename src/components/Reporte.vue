@@ -111,19 +111,16 @@ export default {
     },
   created:function(){
      this.obtengoMesAnio()//this.fetchItems();
-
   },
   methods:{
     obtengoMesAnio: function () {
       const fecha= this.fecha;
-      //const baseUrl = process.env.baseURL || "http://localhost:3000";
-      const PORT = process.env.PORT;
-     let uri = 'http://localhost:'+PORT+'/users/'+fecha;
+      const baseUrl = process.env.baseURL || "http://localhost:3000";
+     let uri = baseUrl+'/users/'+fecha;
       this.axios.get(uri).then((response) => {      
         this.items = response.data;
            this.obtenerConsumoTotal();
            this.obtenerConsumoPromedio();
-
       }).catch(error => {
     throw new Error(error);
     })  
@@ -139,7 +136,6 @@ export default {
           this.miIcon='th-list';
           this.tooltip='Cambiar a Vista de Lista';
         }
-
     } ,
     obtenerConsumoTotal: function () {
                   var total= this.items.reduce((acc, item) => acc + item.consumo, 0)
@@ -151,8 +147,6 @@ export default {
                   var total= this.items.reduce((acc, item) => acc += item.consumo, 0)
                   this.promedio = (total/= count);
                 }            
-
-
 },
 computed: {
       formattedItems() {
@@ -163,28 +157,22 @@ computed: {
           }, []);
       } 
   }
-
   }
-
 </script>
 
 <style scoped lang="scss">
-
 .container {
   display: grid;
-
   grid-template-areas:
     "header header header"
     "nav content side"
     "footer footer footer";
-
   grid-template-columns: 200px 1fr 200px;
   grid-template-rows: auto 1fr auto;
   grid-gap: 10px;
   height: 100vh;
   border-color: black;
 }
-
 header {
   grid-area: header;
   background-color: black;
@@ -192,31 +180,26 @@ header {
   justify-content: space-between;
   align-items: center;
 }
-
 nav {
   grid-area: nav;
   margin-left: 0.5rem;
   margin-right: 1rem;
   margin-top:5rem;
 }
-
 main {
   grid-area: content;
   
 }
-
 aside {
   grid-area: side;
   margin-right: 0.5rem;
   margin-left: 1rem;
   margin-top:10rem;
 }
-
 footer {
   grid-area: footer;
   background-color: beige;
 }
-
 @media (max-width: 768px) {
   .container {
     grid-template-areas:
@@ -225,7 +208,6 @@ footer {
       "content"
       "side"
       "footer";
-
     grid-template-columns: 1fr;
     grid-template-rows:
       auto /* Header */
@@ -234,13 +216,9 @@ footer {
       minmax(75px, auto) /* Sidebar */
       auto; /* Footer */
   }
-
   nav, aside {
     margin: 0;
   }
 }
  
-
-
-
 </style>
