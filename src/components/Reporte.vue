@@ -93,7 +93,10 @@ export default {
        data(){
     return{
       items: [],
-      fecha:  new Date().getMonth()+1 +'-'+new Date().getFullYear(),
+    
+   //   anio:  new Date().getFullYear(),
+    //  mes: (new Date().getMonth()+1).toString().padStart(0,"0"),
+      fecha:  (new Date().getMonth()+1).toString().padStart(0,"0") +'-'+new Date().getFullYear(),
         options: {
           format: 'MM-YYYY',
           useCurrent: false,
@@ -110,11 +113,31 @@ export default {
       datePicker
     },
   created:function(){
-     this.obtengoMesAnio()//this.fetchItems();
+    this.fecha = this.fechaActual()
+     this.obtengoMesAnio()
+     
   },
   methods:{
+     
+     fechaActual: function (){
+      let fechaActual='';
+
+      let date = new Date()
+
+      let month = date.getMonth() + 1
+      let year = date.getFullYear()
+
+      if(month < 10){
+          fechaActual = `0${month}-${year}`;
+      }else{
+          fechaActual =`${month}-${year}`;
+      }
+        return fechaActual;
+     },
+
+
     obtengoMesAnio: function () {
-      const fecha= this.fecha;
+       const fecha= this.fecha;     
       const baseUrl = process.env.baseURL || "http://localhost:3000";
      let uri = baseUrl+'/users/'+fecha;
       this.axios.get(uri).then((response) => {      
