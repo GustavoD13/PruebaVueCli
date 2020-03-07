@@ -51,9 +51,9 @@
     <b-card v-for="item in row" :key="item.id"  :header="item.unidad" align="center" class="m-1 font-italic border-left"> 
    <!--   <b-card v-for="item in row" :key="item.id" border-variant="info" :header="item.unidad" align="center" class="card">-->
    <b-card-text class="text-left text-monospace">
-       Consumo: {{item.consumo}} Kw
-       Porcentaje: {{item.porcentaje}}
-       Costo: {{item.costo}}
+       Consumo:{{item.consumo}} Kw
+       Porcentaje:{{item.porcentaje}}
+       Costo:{{item.costo}}
   </b-card-text>
      </b-card>
     </b-card-group>
@@ -93,10 +93,7 @@ export default {
        data(){
     return{
       items: [],
-    
-   //   anio:  new Date().getFullYear(),
-    //  mes: (new Date().getMonth()+1).toString().padStart(0,"0"),
-      fecha:  (new Date().getMonth()+1).toString().padStart(0,"0") +'-'+new Date().getFullYear(),
+      fecha:  new Date().getMonth()+1 +'-'+new Date().getFullYear(),
         options: {
           format: 'MM-YYYY',
           useCurrent: false,
@@ -113,20 +110,17 @@ export default {
       datePicker
     },
   created:function(){
-    this.fecha = this.fechaActual()
-     this.obtengoMesAnio()
+    this.fecha = this.fechaActual();
+     this.obtengoMesAnio();
      
   },
   methods:{
      
      fechaActual: function (){
       let fechaActual='';
-
       let date = new Date()
-
       let month = date.getMonth() + 1
       let year = date.getFullYear()
-
       if(month < 10){
           fechaActual = `0${month}-${year}`;
       }else{
@@ -134,7 +128,6 @@ export default {
       }
         return fechaActual;
      },
-
 
     obtengoMesAnio: function () {
        const fecha= this.fecha;     
@@ -169,7 +162,10 @@ export default {
                   let count = this.items.length;
                   var total= this.items.reduce((acc, item) => acc += item.consumo, 0)
                   this.promedio = (total/= count);
-                }            
+                },
+    obtenerCostoIndividual: function(){
+      
+    }        
 },
 computed: {
       formattedItems() {
